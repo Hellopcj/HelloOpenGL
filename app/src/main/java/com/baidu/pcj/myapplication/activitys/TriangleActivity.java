@@ -1,6 +1,7 @@
 package com.baidu.pcj.myapplication.activitys;
 
 import android.app.Activity;
+import android.opengl.GLES10;
 import android.opengl.GLES20;
 import android.opengl.GLES30;
 import android.opengl.GLSurfaceView;
@@ -26,7 +27,12 @@ public class TriangleActivity extends Activity implements GLSurfaceView.Renderer
     private FloatBuffer vertexBuffer;
 
     // 设置颜色  RGBA
-    float[] mColors = {1.0f, 1.0f, 1.0f, 1.0f};
+    float[] mColors = {
+            1f, 0f , 0f,0f,
+
+            0f , 1f , 0f ,0f,
+
+            0f , 0f , 1f ,0f};
     private float triangleCoords[] = {  // 正三角形的三个顶点坐标
             // 顺序分别为  顶点  left  right
             0.5f, 0.5f, 0.0f, // top
@@ -78,6 +84,8 @@ public class TriangleActivity extends Activity implements GLSurfaceView.Renderer
           /*------ Log  start------*/
         Log.e("pcj", "运行了这个onSurfaceCreated method");
          /*------ Log  end------*/
+         // 设置清屏颜色 (此为黑色)
+        GLES20.glClearColor(0f,0f,0f,0f);
         // 申请底层空间
         ByteBuffer bb = ByteBuffer.allocateDirect(triangleCoords.length * 4);
         bb.order(ByteOrder.nativeOrder());

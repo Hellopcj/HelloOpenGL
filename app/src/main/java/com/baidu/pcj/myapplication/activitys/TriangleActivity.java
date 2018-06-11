@@ -28,11 +28,11 @@ public class TriangleActivity extends Activity implements GLSurfaceView.Renderer
 
     // 设置颜色  RGBA
     float[] mColors = {
-            1f, 0f , 0f,0f,
+            1f, 0f, 0f, 0f,
 
-            0f , 1f , 0f ,0f,
+            0f, 1f, 0f, 0f,
 
-            0f , 0f , 1f ,0f};
+            0f, 0f, 1f, 0f};
     private float triangleCoords[] = {  // 正三角形的三个顶点坐标
             // 顺序分别为  顶点  left  right
             0.5f, 0.5f, 0.0f, // top
@@ -73,9 +73,6 @@ public class TriangleActivity extends Activity implements GLSurfaceView.Renderer
         mTriangle.setEGLContextClientVersion(2);
         mTriangle.setRenderer(this);
         mTriangle.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
-
-
-
     }
 
     // surface创建时被调用
@@ -84,14 +81,14 @@ public class TriangleActivity extends Activity implements GLSurfaceView.Renderer
           /*------ Log  start------*/
         Log.e("pcj", "运行了这个onSurfaceCreated method");
          /*------ Log  end------*/
-         // 设置清屏颜色 (此为黑色)
-        GLES20.glClearColor(0f,0f,0f,0f);
-        // 申请底层空间
+        // 设置清屏颜色 (此为黑色)
+        GLES20.glClearColor(0f, 0f, 0f, 0f);
+        // 申请缓冲区底层空间  *4是因为一个float占用4个字节
         ByteBuffer bb = ByteBuffer.allocateDirect(triangleCoords.length * 4);
-        bb.order(ByteOrder.nativeOrder());
-        vertexBuffer = bb.asFloatBuffer();
-        vertexBuffer.put(triangleCoords);
-        vertexBuffer.position(0);
+        bb.order(ByteOrder.nativeOrder());//设置字节顺序
+        vertexBuffer = bb.asFloatBuffer();// 转换为Float型缓冲
+        vertexBuffer.put(triangleCoords);//向缓冲区中放入顶点坐标数据
+        vertexBuffer.position(0);//设置缓冲区起始位置
 
         //  设置顶点着色器
         int vertexShader = loadShader(GLES20.GL_VERTEX_SHADER, vertexShaderCode);
@@ -122,7 +119,7 @@ public class TriangleActivity extends Activity implements GLSurfaceView.Renderer
     @Override
     public void onDrawFrame(GL10 gl10) {
         //  这个必须加上 设置清除屏幕
-        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT|GLES20.GL_DEPTH_BUFFER_BIT);
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
         //  将程序加入到opengl 环境
         GLES20.glUseProgram(Programe);
         // 取顶点着色器的句柄  vPosition

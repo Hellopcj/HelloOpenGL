@@ -3,6 +3,7 @@ package com.baidu.pcj.myapplication.activitys;
 import android.app.Activity;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
+import android.opengl.Matrix;
 import android.os.Bundle;
 
 import com.baidu.pcj.myapplication.R;
@@ -74,6 +75,7 @@ public class ColorTrangleActivity extends Activity implements GLSurfaceView.Rend
     public void onSurfaceCreated(GL10 gl10, EGLConfig eglConfig) {
         //  设置背景颜色
         GLES20.glClearColor(0f, 0f, 0f, 0f);
+        // 透视投影 Matrix.frustumM();
 
 
     }
@@ -94,9 +96,9 @@ public class ColorTrangleActivity extends Activity implements GLSurfaceView.Rend
     }
 
 
-    private int setShader(int type, String code){
+    private int setShader(int type, String code) {
         int shader = 0;
-     //   GLES20.glAttachShader(type,code);
+        //   GLES20.glAttachShader(type,code);
 
         return shader;
     }

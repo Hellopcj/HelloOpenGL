@@ -75,7 +75,7 @@ public class OpenGlThreadPool {
     public static int PARALLEL_EXCUTOR = 1;
 
     /**
-     * 串行 数据队列
+     * 串行 数据队列 静态阻塞队列
      */
     private Queue<byte[]> mSerialQueue;
     /**
@@ -113,10 +113,12 @@ public class OpenGlThreadPool {
 
 
     private OpenGlThreadPool() {
+        // TODO 串行 线程池
+        mSerialThreadPool = new ThreadPoolExecutor(CORE_POOL_SIZE, MAX_POOL_SIZE, keepAliveTime, unitTime, mWorkQueue, mThreadFactory, new DiscardOldestPolicy());
+        mSerialThreadPool.allowCoreThreadTimeOut(true);
 
-        mSerialThreadPool = new ThreadPoolExecutor(CORE_POOL_SIZE,MAX_POOL_SIZE,keepAliveTime,unitTime,mWorkQueue,mThreadFactory,new DiscardOldestPolicy());
-
-
+        // TODO 并行 线程池
+      //  mParallelThreadPool = new ThreadPoolExecutor(CORE_POOL_SIZE, MAX_POOL_SIZE,)
 
         mSerialQueue = new LinkedBlockingDeque<>(MAX_SERIA_THREAD_SIZE);
         mParellelQueue = new LinkedBlockingDeque<>(MAX_PARALLEL_THREAD_SIZE);
@@ -129,6 +131,20 @@ public class OpenGlThreadPool {
             }
         }
         return mInstance;
+    }
+
+
+    private void destroyThreadPool(ThreadPoolExecutor poolExecutor, Queue<byte[]> queue) {
+        // 参考 shutdown方法
+        if (poolExecutor == null) {
+            return;
+        } else
+            try {
+                poolExecutor.shutdown();
+                queue.clear();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
     }
 
     /**

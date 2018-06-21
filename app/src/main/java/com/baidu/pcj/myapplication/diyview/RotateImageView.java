@@ -9,10 +9,11 @@ import android.widget.ImageView;
 
 /**
  * Created by puchunjie .
+ * 支持重力旋转的ImageView
  */
 
 @SuppressLint("AppCompatCustomView")
-public class RotateImageView extends ImageView implements  IRotateView{
+public class RotateImageView extends ImageView implements IRotateView {
     /**
      * 当前视频旋转的角度
      */

@@ -12,7 +12,7 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 /**
- * 彩色三角形 （等腰三角形）  使用matrix
+ * 彩色三角形  等腰 使用matrix
  */
 public class ColorTrangleActivity extends Activity implements GLSurfaceView.Renderer {
 

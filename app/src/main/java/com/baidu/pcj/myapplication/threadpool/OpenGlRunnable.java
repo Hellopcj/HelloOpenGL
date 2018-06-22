@@ -1,5 +1,8 @@
-package com.baidu.pcj.myapplication.threadpool;
+/*
+ * Copyright (c) 2018. PuChunJie . All Rights Reserved
+ */
 
+package com.baidu.pcj.myapplication.threadpool;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,5 +19,6 @@ public class OpenGlRunnable implements Runnable {
 
     public void returnAvailableData() {
         Map map = new HashMap();
+       // Collections.secondaryHash(map);
     }
 }

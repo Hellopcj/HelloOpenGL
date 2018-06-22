@@ -12,7 +12,10 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.baidu.pcj.myapplication.activitys.ColorTrangleActivity;
+import com.baidu.pcj.myapplication.activitys.ConeActivity;
+import com.baidu.pcj.myapplication.activitys.CubeActivity;
 import com.baidu.pcj.myapplication.activitys.Load3DObj;
+import com.baidu.pcj.myapplication.activitys.RegularTriangle;
 import com.baidu.pcj.myapplication.activitys.RoundActivity;
 import com.baidu.pcj.myapplication.activitys.TriangleActivity;
 import com.baidu.pcj.myapplication.activitys.WithLigthRoundActivity;
@@ -40,7 +43,10 @@ public class EnterActivity extends Activity {
         mDatas = new ArrayList<>();
         // 设置数据
         setData("三角形", TriangleActivity.class);
+        setData("正三角形", RegularTriangle.class);
         setData("彩色三角形", ColorTrangleActivity.class);
+        setData("正方体", CubeActivity.class);
+        setData("圆锥", ConeActivity.class);
         setData("球体", RoundActivity.class);
         setData("带光的球体", WithLigthRoundActivity.class);
         setData("load 3d obj", Load3DObj.class);

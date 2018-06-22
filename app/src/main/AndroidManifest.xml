@@ -25,7 +25,11 @@
         <activity android:name=".activitys.ColorTrangleActivity" />
         <activity android:name=".activitys.RoundActivity" />
         <activity android:name=".activitys.WithLigthRoundActivity" />
-        <activity android:name=".activitys.Load3DObj"></activity>
+        <activity android:name=".activitys.Load3DObj" />
+        <activity android:name=".activitys.RegularTriangle" />
+        <activity android:name=".activitys.Cube" />
+        <activity android:name=".activitys.CubeActivity" />
+        <activity android:name=".activitys.ConeActivity"></activity>
     </application>
 
 </manifest>

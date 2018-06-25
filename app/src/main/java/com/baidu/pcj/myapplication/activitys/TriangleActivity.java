@@ -81,8 +81,8 @@ public class TriangleActivity extends Activity implements GLSurfaceView.Renderer
           /*------ Log  start------*/
         Log.e("pcj", "运行了这个onSurfaceCreated method");
          /*------ Log  end------*/
-        // 设置清屏颜色 (此为黑色)
-        GLES20.glClearColor(0f, 0f, 0f, 0f);
+        // 设置清屏颜色 (此为白色)
+        GLES20.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
         // 申请缓冲区底层空间  *4是因为一个float占用4个字节
         ByteBuffer bb = ByteBuffer.allocateDirect(triangleCoords.length * 4);
         bb.order(ByteOrder.nativeOrder());//设置字节顺序

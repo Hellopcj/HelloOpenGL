@@ -49,7 +49,7 @@ public class RegularTriangle extends Activity implements GLSurfaceView.Renderer 
     private final int VERTRIX_COUNT = trianglecoods.length / COORS_PER_VERTRIX;
 
     //设置颜色，依次为红绿蓝和透明通道
-    float color[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    float color[] = {1.0f, 1.0f, 1.0f, 1.0f};
 
     // 增加Matrix 矩阵变换   顶点着色器code
     private final String verTextShaderCode =
@@ -67,7 +67,7 @@ public class RegularTriangle extends Activity implements GLSurfaceView.Renderer 
                     "  gl_FragColor = vColor;" +
                     "}";
 
-    // 矩阵数组
+    // 矩阵数组 设置相机相关
     private float[] mViewMatrix = new float[16];
     private float[] mProjectMatrix = new float[16];
     private float[] mMVPMatrix = new float[16]; // 计算后的矩阵 容器
@@ -83,7 +83,7 @@ public class RegularTriangle extends Activity implements GLSurfaceView.Renderer 
         mView.setRenderer(this);
         // 自动模式和脏模式（脏模式：用户需要重绘的时候 需要主动调用 类似于自定义view的invalidate（）方法 节省cpu）
         mView.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
-        //   triglewithshader();
+
     }
 
     private void triglewithshader() {
@@ -94,8 +94,10 @@ public class RegularTriangle extends Activity implements GLSurfaceView.Renderer 
         verteBuffer.put(trianglecoods);
         verteBuffer.position(0);
 
-        int vertrixShader = loadShader(GLES20.GL_VERTEX_SHADER, verTextShaderCode);
-        int fragmentShader = loadShader(GLES20.GL_FRAGMENT_SHADER, vertextFragmentCode);
+        int vertrixShader = loadShader(GLES20.GL_VERTEX_SHADER,
+                verTextShaderCode);
+        int fragmentShader = loadShader(GLES20.GL_FRAGMENT_SHADER,
+                vertextFragmentCode);
 
         mProgram = GLES20.glCreateProgram();
         GLES20.glAttachShader(mProgram, vertrixShader);
@@ -108,13 +110,15 @@ public class RegularTriangle extends Activity implements GLSurfaceView.Renderer 
     @Override
     public void onSurfaceCreated(GL10 gl10, EGLConfig eglConfig) {
      /* --  设置清屏颜色（黑色）可以不设置  -- */
+        // 设置清屏颜色 (此为白色)
+        GLES20.glClearColor(0.5f,0.5f,0.5f,1.0f);
         triglewithshader();
     }
 
     @Override
     public void onSurfaceChanged(GL10 gl10, int i, int i1) {
         //  作用绘制后的图形的可见区域  （绘制后的图形放在哪个具体的位置）i:width i1:heigth
-        // GLES20.glViewport(0, 0, i, i1);
+        GLES20.glViewport(0,0,i,i1);
         // 计算宽高比
         float ratio = (float) i / i1;
         // 设置透视投影
@@ -128,18 +132,16 @@ public class RegularTriangle extends Activity implements GLSurfaceView.Renderer 
 
     @Override
     public void onDrawFrame(GL10 gl10) {
-         /* --  清除底色  底色 白色 -- */
-        GLES20.glClearColor(0.0f, 1f, 1f, 1f);
-        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
+        //  这个必须加上 设置清除屏幕
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT|GLES20.GL_DEPTH_BUFFER_BIT);
         // 绘制
         ondraw();
 
     }
 
     private void ondraw() {
+        // program应用到GLES环境
         GLES20.glUseProgram(mProgram);
-//        GLES20.glActiveTexture(GLES20.GL_TEXTURE);
-
         // 获取 矩阵 句柄
         mMatrixHandler = GLES20.glGetUniformLocation(mProgram, "vMatrix");
         // 顶点psitiosn 句柄

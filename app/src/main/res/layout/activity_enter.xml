@@ -10,7 +10,7 @@
         android:id="@+id/rl_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="#888888"
+        android:divider="@null"
         android:dividerHeight="1px">
     </ListView>
 </LinearLayout>
